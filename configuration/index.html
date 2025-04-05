@@ -690,8 +690,8 @@ require that you edit the configuration file using your preferred text
 editor. Eventually I aim to make everything that can be configured
 configurable within Hike itself.</p>
 </div>
-<p>The location of the configuration file will depend on how your system is
-configured; but by default it is looked for in
+<p>The location of the configuration file will depend on how your operating
+system and its settings; but by default it is looked for in
 <a href="https://specifications.freedesktop.org/basedir-spec/latest/"><code>$XDG_CONFIG_HOME</code></a>,
 in a <code>hike</code> subdirectory. Mostly this will translate to the file being
 called <code>~/.config/hike/configuration.json</code>.</p>
@@ -1047,11 +1047,11 @@ The main modifier keys to know are <code>shift</code>, <code>ctrl</code>, <code>
 and <code>hyper</code>; letter keys are their own letters; shifted letter keys are
 their upper-case versions; function keys are simply <kbd>f1</kbd>,
 <kbd>f2</kbd>, etc; symbol keys (the likes of <code>#</code>, <code>@</code>, <code>*</code>, etc...)
-generally use a name (<code>number_sign</code>, <code>at</code>, <code>asterisk</code>).</p>
+generally use a name (<code>number_sign</code>, <code>at</code>, <code>asterisk</code>, etc...).</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>If you want to test and discover all of the key names and combiantions
-that will work you may want to install
+that will work, you may want to install
 <a href="https://github.com/Textualize/textual-dev"><code>textual-dev</code></a> and use the
 <code>textual keys</code> command.</p>
 <p>If you need help with keyboard bindings <a href="../#questions-and-feedback">please feel free to
@@ -1069,10 +1069,10 @@ value in the configuration file.</p>
 </code></pre></div>
 <h2 id="main-forge-branches">Main forge branches</h2>
 <p>When Hike looks for the README file of a repository in a git forge, by
-default it first looks in the branch <code>main</code> and then as a backup in
+default it first looks in the <code>main</code> branch and then as a backup in
 <code>master</code>. If you wish to change this you can edit the list in the
 configuration file.</p>
-<p>For example, if you wanted to add <code>staging</code> and <code>production</code> to the list of
+<p>For example: if you wanted to add <code>staging</code> and <code>production</code> to the list of
 branches checked, you could change this:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">&quot;main_branches&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="s2">&quot;main&quot;</span><span class="p">,</span>
@@ -1124,8 +1124,8 @@ extension as Markdown files, you could change this:</p>
 <h2 id="navigation-panel">Navigation panel</h2>
 <h3 id="visibility">Visibility</h3>
 <p>You can show or hide the navigation panel. This can be done in Hike with the
-<code>Toggle Navigation</code> (<a href="#bindable-commands"><code>ToggleNavigation</code></a>) command
-(bound to <kbd>F2</kbd> by default).</p>
+<code>Toggle Navigation</code> (<a href="#bindable-commands"><code>ToggleNavigation</code></a>, bound to
+<kbd>F2</kbd> by default) command.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>You can force nagivation <a href="../#-navigation">visible</a> or
@@ -1607,8 +1607,8 @@ for future runs of Hike.</p>
 <h3 id="location">Location</h3>
 <p>When <a href="#visibility">visible</a>, the navigation panel can be located on the left
 or the right of the screen; this is toggled using the <code>Change Navigation
-Side</code> command (<a href="#bindable-commands"><code>ChangeNavigationSide</code></a>) which is found
-to <kbd>Shift</kbd>+<kbd>F2</kbd> by default.</p>
+Side</code> command (<a href="#bindable-commands"><code>ChangeNavigationSide</code></a>, bound to
+<kbd>Shift</kbd>+<kbd>F2</kbd> by default).</p>
 <p>Here is Hike with the navigation panel visible on the right:</p>
 <p><svg class="rich-terminal" viewBox="0 0 1482 1026.0" xmlns="http://www.w3.org/2000/svg">
     <!-- Generated with Rich https://www.textualize.io -->
@@ -1860,8 +1860,8 @@ setting in the configuration file:</p>
 </code></pre></div>
 <h2 id="theme">Theme</h2>
 <p>Hike has a number of themes available. You can select a theme using the
-<code>Change Theme</code> (<a href="#bindable-commands"><code>ChangeTheme</code></a>) command (bound to <kbd>F9</kbd> by default).
-The available themes include:</p>
+<code>Change Theme</code> (<a href="#bindable-commands"><code>ChangeTheme</code></a>, bound to <kbd>F9</kbd>
+by default) command. The available themes include:</p>
 <ul>
 <li>catppuccin-latte</li>
 <li>catppuccin-mocha</li>
