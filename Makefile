@@ -1,15 +1,18 @@
-app    := hike
-src    := src/
-tests  := tests/
-docs   := docs/
-run    := uv run
-test   := uv run pytest
-python := $(run) python
-lint   := uv run ruff check --select I
-fmt    := uv run ruff format
-mypy   := $(run) mypy
-mkdocs := $(run) mkdocs
-spell  := $(run) codespell
+app     := hike
+src     := src/
+tests   := tests/
+docs    := docs/
+run     := uv run
+test    := $(run) pytest
+python  := $(run) python
+ruff    := $(run) ruff
+lint    := $(ruff) check --select I
+fmt     := $(ruff) format
+mypy    := $(run) mypy
+mkdocs  := $(run) mkdocs
+spell   := $(run) codespell
+build   := uv build
+publish := uv publish --yes --skip-existing
 
 ##############################################################################
 # Local "interactive testing" of the code.
@@ -91,19 +94,19 @@ publishdocs: clean-docs	# Set up the docs for publishing
 # Package/publish.
 .PHONY: package
 package:			# Package the library
-	uv build
+	$(build)
 
 .PHONY: spackage
 spackage:			# Create a source package for the library
-	uv build --sdist
+	$(build) --sdist
 
 .PHONY: testdist
 testdist: package			# Perform a test distribution
-	uv publish --yes --skip-existing --repository testpypi --repository-url https://test.pypi.org/legacy/
+	$(publish) --repository testpypi --repository-url https://test.pypi.org/legacy/
 
 .PHONY: dist
-dist: package			# Upload to pypi
-	uv publish --yes --skip-existing
+dist: package			# Upload to PyPI
+	$(publish)
 
 ##############################################################################
 # Utility.
