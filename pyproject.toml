@@ -1,6 +1,6 @@
 [project]
 name = "hike"
-version = "1.1.2"
+version = "1.1.2.4"
 description = "A Markdown browser for the terminal"
 authors = [
     { name = "Dave Pearson", email = "davep@davep.org" }
@@ -16,7 +16,7 @@ dependencies = [
 ]
 readme = "README.md"
 requires-python = ">= 3.10"
-license = { text = "GNU General Public License v3 or later (GPLv3+)" }
+license = "GPL-3.0-or-later"
 keywords = [
     "terminal",
     "tui",
@@ -34,7 +34,6 @@ classifiers = [
     "Intended Audience :: End Users/Desktop",
     "Intended Audience :: Information Technology",
     "Intended Audience :: Other Audience",
-    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
     "Operating System :: MacOS",
     "Operating System :: Microsoft :: Windows :: Windows 10",
     "Operating System :: Microsoft :: Windows :: Windows 11",
@@ -63,12 +62,6 @@ Discussions = "https://github.com/davep/hike/discussions"
 [project.scripts]
 hike = "hike.__main__:main"
 
-[build-system]
-# https://github.com/astral-sh/rye/issues/1446
-requires = ["hatchling==1.26.3", "hatch-vcs"]
-# requires = ["hatchling"]
-build-backend = "hatchling.build"
-
 [tool.uv]
 managed = true
 dev-dependencies = [
@@ -92,3 +85,9 @@ packages = ["src/hike"]
 venvPath="."
 venv=".venv"
 exclude=[".venv"]
+
+[[tool.uv.index]]
+name = "testpypi"
+url = "https://test.pypi.org/simple/"
+publish-url = "https://test.pypi.org/legacy/"
+explicit = true
