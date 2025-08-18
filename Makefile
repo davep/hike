@@ -8,7 +8,7 @@ python  := $(run) python
 ruff    := $(run) ruff
 lint    := $(ruff) check --select I
 fmt     := $(ruff) format
-mypy    := $(run) mypy
+mypy    := $(run) mypy --scripts-are-modules
 mkdocs  := $(run) mkdocs
 spell   := $(run) codespell
 build   := uv build
@@ -59,11 +59,11 @@ codestyle:			# Is the code formatted correctly?
 
 .PHONY: typecheck
 typecheck:			# Perform static type checks with mypy
-	$(mypy) --scripts-are-modules $(src) $(tests)
+	$(mypy) $(src) $(tests)
 
 .PHONY: stricttypecheck
 stricttypecheck:	        # Perform a strict static type checks with mypy
-	$(mypy) --scripts-are-modules --strict $(src) $(tests)
+	$(mypy) --strict $(src) $(tests)
 
 .PHONY: test
 test:				# Run the unit tests
