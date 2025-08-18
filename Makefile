@@ -12,7 +12,7 @@ mypy    := $(run) mypy --scripts-are-modules
 mkdocs  := $(run) mkdocs
 spell   := $(run) codespell
 build   := uv build
-publish := uv publish --yes --skip-existing
+publish := uv publish --username __token__
 
 ##############################################################################
 # Local "interactive testing" of the code.
@@ -102,7 +102,7 @@ spackage:			# Create a source package for the library
 
 .PHONY: testdist
 testdist: package			# Perform a test distribution
-	$(publish) --repository testpypi --repository-url https://test.pypi.org/legacy/
+	$(publish) --publish-url https://test.pypi.org/legacy/ --check-url=https://test.pypi.org/simple/
 
 .PHONY: dist
 dist: package			# Upload to PyPI
