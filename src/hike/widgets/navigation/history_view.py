@@ -70,7 +70,7 @@ class HistoryView(EnhancedOptionList):
     """
 
     HELP = """
-    ## Documenting viewing history
+    ## Document viewing history
 
     This is your document viewing history. Here you can revisit locations
     you've viewed, and also remove individual or all locations.
