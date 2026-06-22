@@ -1,5 +1,12 @@
 # Hike ChangeLog
 
+## Unreleased
+
+**Released: WiP**
+
+- Fixed a typo in the help text for the document viewer.
+  ([#155](https://github.com/davep/hike/pull/155))
+
 ## v1.4.0
 
 **Released: 2026-03-25**
