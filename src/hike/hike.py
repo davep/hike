@@ -3,9 +3,11 @@
 ##############################################################################
 # Python imports.
 from argparse import Namespace
+from dataclasses import replace
 
 ##############################################################################
 # Textual imports.
+from textual import events
 from textual.app import InvalidThemeError, ScreenStackError
 
 ##############################################################################
@@ -20,6 +22,12 @@ from .data import (
     update_configuration,
 )
 from .screens import Main
+from .support import (
+    SCHEME_THEMES,
+    UNWATCH_COLOUR_SCHEME,
+    WATCH_COLOUR_SCHEME,
+    terminal_theme,
+)
 
 
 ##############################################################################
@@ -61,10 +69,12 @@ class Hike(EnhancedApp[None]):
         self._arguments = arguments
         """The command line arguments passed to the application."""
         super().__init__()
+        self._match_terminal(terminal_theme() or "textual-dark")
         configuration = load_configuration()
-        if configuration.theme is not None:
+        theme = arguments.theme or configuration.theme
+        if theme is not None:
             try:
-                self.theme = arguments.theme or configuration.theme
+                self.theme = theme
             except InvalidThemeError:
                 pass
         try:
@@ -76,6 +86,34 @@ class Hike(EnhancedApp[None]):
         """Save the application's theme when it's changed."""
         with update_configuration() as config:
             config.theme = self.theme
+
+    def _match_terminal(self, theme: str) -> None:
+        """Make the `textual-auto` theme look like the given theme.
+
+        Args:
+            theme: The name of the theme that matches the terminal.
+        """
+        if (base := self.get_theme(theme)) is not None:
+            self.register_theme(replace(base, name="textual-auto"))
+            if self.theme == "textual-auto":
+                self.mutate_reactive(Hike.theme)
+
+    def on_mount(self) -> None:
+        """Ask the terminal to tell us when its colour scheme changes."""
+        if self._driver is not None:
+            self._driver.write(WATCH_COLOUR_SCHEME)
+
+    def on_unmount(self) -> None:
+        """Stop the terminal telling us about colour scheme changes."""
+        if self._driver is not None:
+            self._driver.write(UNWATCH_COLOUR_SCHEME)
+
+    async def on_event(self, event: events.Event) -> None:
+        """Keep `textual-auto` in step with the terminal's colour scheme."""
+        if isinstance(event, events.Key) and event.key in SCHEME_THEMES:
+            self._match_terminal(SCHEME_THEMES[event.key])
+            return
+        await super().on_event(event)
 
     def get_default_screen(self) -> Main:
         """Get the default screen for the application.
