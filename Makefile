@@ -1,19 +1,20 @@
-app     := hike
-src     := src/
-tests   := tests/
-docs    := docs/
-run     := uv run
-sync    := uv sync
-build   := uv build
-publish := uv publish --username=__token__ --keyring-provider=subprocess
-test    := $(run) pytest
-python  := $(run) python
-ruff    := $(run) ruff
-lint    := $(ruff) check
-fmt     := $(ruff) format
-mypy    := $(run) mypy
-mkdocs  := $(run) mkdocs
-spell   := $(run) codespell
+app          := hike
+src          := src/
+tests        := tests/
+docs         := docs/
+run          := uv run
+sync         := uv sync
+build        := uv build
+publish      := uv publish --username=__token__ --keyring-provider=subprocess
+test         := $(run) pytest
+python       := $(run) python
+ruff         := $(run) ruff
+lint         := $(ruff) check
+fmt          := $(ruff) format
+mypy         := $(run) mypy
+mkdocs       := $(run) zensical
+publish-docs := $(run) ghp-import --no-jekyll --push
+spell        := $(run) codespell
 
 ##############################################################################
 # Local "interactive testing" of the code.
@@ -88,8 +89,8 @@ rtfm:				# Locally read the library documentation
 	$(mkdocs) serve
 
 .PHONY: publishdocs
-publishdocs: clean-docs	# Set up the docs for publishing
-	$(mkdocs) gh-deploy
+publishdocs: clean-docs docs	# Set up the docs for publishing
+	$(publish-docs) site/
 
 ##############################################################################
 # Package/publish.
@@ -132,7 +133,7 @@ clean-packaging:		# Clean the package building files
 
 .PHONY: clean-docs
 clean-docs:			# Clean up the documentation building files
-	rm -rf site .screenshot_cache
+	rm -rf site .cache
 
 .PHONY: clean
 clean: clean-packaging clean-docs # Clean the build directories

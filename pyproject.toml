@@ -77,10 +77,11 @@ dev = [
     "pre-commit>=4.1.0",
     "textual-dev>=1.7.0",
     "pytest>=8.3.4",
-    "mkdocs-material>=9.6.11",
     "markdown-exec>=1.10.3",
     "codespell>=2.4.1",
     "ruff>=0.12.9",
+    "zensical>=0.0.24",
+    "ghp-import>=2.1.0",
 ]
 
 [[tool.uv.index]]
