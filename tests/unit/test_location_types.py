@@ -53,6 +53,10 @@ def test_maybe_markdown(to_test: HikeLocation, expected: bool) -> None:
         ("https", False),
         ("http://", False),
         ("https://", False),
+        ("  http://example.com/  ", True),
+        ("  https://example.com/test.md  ", True),
+        ("\thttps://example.com/\n", True),
+        ("   ", False),
     ),
 )
 def test_looks_urllike(to_test: str, expected: bool) -> None:

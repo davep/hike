@@ -33,7 +33,7 @@ class OpenURLCommand(InputCommand):
             `True` if the command was handled; `False` if not.
         """
         if looks_urllike(text):
-            for_widget.post_message(OpenLocation(URL(text)))
+            for_widget.post_message(OpenLocation(URL(text.strip())))
             return True
         return False
 
