@@ -100,7 +100,8 @@ def looks_urllike(candidate: str) -> bool:
     Returns:
         `True` if the string looks like a URL, `False` if not.
     """
-    return (url := URL(candidate)).is_absolute_url and url.scheme in ("http", "https")
+    url = URL(candidate.strip())
+    return url.is_absolute_url and url.scheme in ("http", "https")
 
 
 ##############################################################################
